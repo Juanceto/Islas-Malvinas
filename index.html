@@ -2,7 +2,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Malvinas</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Rubik+Dirt&display=swap" rel="stylesheet">
 
@@ -13,6 +12,12 @@ body {
   background: url('malvinas.jpg') no-repeat center center fixed; 
   background-size: cover; 
   color: white; 
+}
+
+/* 🔥 ENVUELVE TODO PARA CENTRAR HEADER + FOOTER */
+.wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .header { 
@@ -30,15 +35,12 @@ body {
   font-family: 'Lobster', cursive;
 }
 
-/* 🔥 CENTRADO REAL */
 .container { 
   padding: 40px; 
   display: grid; 
   grid-template-columns: repeat(auto-fit, minmax(250px, 350px)); 
   justify-content: center;
   gap: 20px; 
-  max-width: 1000px;
-  margin: 0 auto;
 }
 
 .card { 
@@ -61,20 +63,18 @@ body {
   font-family: 'Rubik Dirt', cursive; 
 }
 
-/* 🔥 IMÁGENES BIEN */
+/* IMÁGENES */
 .card img {
   width: 90%;
   max-width: 300px;
-  height: auto;
-  display: block;
   margin: 15px auto;
+  display: block;
   border-radius: 12px;
 }
 
 .card h2 img {
   width: 80%;
   max-width: 220px;
-  margin: 10px auto 0;
 }
 
 /* VIDEO */
@@ -104,7 +104,7 @@ video { width: 100%; border-radius: 25px; }
 
 .controls button { 
   background: transparent; 
-  border: 1px solid white; 
+  border: 1px solid white ; 
   color:white; 
   padding: 6px 12px; 
   border-radius: 8px; 
@@ -140,118 +140,107 @@ footer {
 
 <body>
 
+<div class="wrapper">
+
 <div class="header">
   <h1>Heroes De Malvinas</h1>
-</div>
+</div> 
 
 <div class="container">
 
-  <div class="card">
-    <h2>2 de Abril 1982</h2>
-    <p>
-      El 2 de Abril de 1982 en Plaza de Mayo, el presidente de facto de ese entonces, <strong>Leopoldo Fortunato Galtieri</strong>, daba una cadena nacional en el balcon de la casa rosada, declarandole la guerra a Reino Unido, para recuperar las islas.<br>
-      La plaza se ensordeció al grito de <strong>"Si quieren venir que vengan, y les presentaremos batalla..."</strong><br>
+<div class="card">
+  <h2>2 de Abril 1982</h2>
+  <p>
+    El 2 de Abril de 1982 en Plaza de Mayo, el presidente de facto de ese entonces, <strong>Leopoldo Fortunato Galtieri</strong>, daba una cadena nacional en el balcon de la casa rosada, declarandole la guerra a Reino Unido, para recuperar las islas.<br>
+    La plaza se ensordeció al grito de <strong>"Si quieren venir que vengan, y les presentaremos batalla..."</strong><br>
 
-      <div class="video-wrapper">
-        <video id="video">
-          <source src="galtieri.mp4" type="video/mp4">
-        </video>
-        <div class="video-controls">
-          <button id="videoBtn" onclick="toggleVideo()">▶</button>
-          <div class="progress" onclick="setVideoProgress(event)">
-            <div class="progress-bar" id="videoBar"></div>
-          </div>
-        </div>
-      </div>
-    </p>
-  </div>
-
-  <div class="card">
-    <h2>Causas</h2>
-    <p>
-      La Guerra de Malvinas empezó en 1982, principalmente porque la dictadura argentina estaba en crisis, había problemas económicos y mucha gente en contra, así que quisieron tapar lo que ocurria en el pais provocando una guerra.
-      Un hecho importante fue lo del chatarrero Constantino Davidoff, que fue a Georgias del Sur a desarmar instalaciones y puso la bandera argentina, lo que generó tensión con los británicos al creer que era una forma de <strong>"soberania"</strong>.
-      Esa situación provocó el inicio de la guerra y un ambiente tenso entre Argentina y Reino Unido<br>
-      <img src="soldados.jpg">
-    </p>
-  </div>
-
-  <div class="card">
-    <h2>Consecuencias <img src="veteranos.jpg"></h2>
-    <p>
-      El 14 de junio de 1982, terminaria la guerra, con 649 soldados argentinos caidos, se daba por terminada la guerra, pero los veteranos al volver al pais fueron perjudicados por los estigmas sociales, el estres y traumas post-guerra, impidiendoles tener una vida normal y corriente.<br>
-      Debido a eso mas de 800 veteranos se quitaron la vida.<br>
-      Pero no fue hasta el año 1992 que el 2 de Abril se conmemoró sus actos de valentía y patriotismo, siendo ley nacional a partir del 22 de noviembre del 2000, recibiendo el reconocimiento que se merecen y dejando de ser "NN".
-    </p>
-  </div>
-
-  <div class="card">
-    <h2>Dia Nacional por los Soldados Caidos</h2>
-    <p>
-      Hoy en dia, el 2 de Abril es conmemorado un dia Nacional por los soldados abatidos en la guerra.<br>
-      Este es el himno conmemorativo a las Islas Malvinas.<br>
-    </p>
-
-    <div class="player">
-      <div class="controls">
-        <button id="playBtn" onclick="toggleAudio()">▶</button>
-        <div class="progress" onclick="setProgress(event)">
-          <div class="progress-bar" id="progressBar"></div>
+    <div class="video-wrapper">
+      <video id="video">
+        <source src="galtieri.mp4" type="video/mp4">
+      </video>
+      <div class="video-controls">
+        <button id="videoBtn" onclick="toggleVideo()">▶</button>
+        <div class="progress" onclick="setVideoProgress(event)">
+          <div class="progress-bar" id="videoBar"></div>
         </div>
       </div>
     </div>
+  </p>
+</div>
 
-    <!-- 🔥 AUDIO FIX GITHUB -->
-    <audio id="audio" preload="auto">
-      <source src="himno.mp3" type="audio/mpeg">
-    </audio> 
+<div class="card">
+  <h2>Causas</h2>
+  <p>
+    La Guerra de Malvinas empezó en 1982, principalmente porque la dictadura argentina estaba en crisis, había problemas económicos y mucha gente en contra, así que quisieron tapar lo que ocurria en el pais provocando una guerra.
+    Un hecho importante fue lo del chatarrero Constantino Davidoff, que fue a Georgias del Sur a desarmar instalaciones y puso la bandera argentina, lo que generó tensión con los británicos al creer que era una forma de <strong>"soberania"</strong>.
+    Esa situación provocó el inicio de la guerra y un ambiente tenso entre Argentina y Reino Unido<br>
+    <img src="soldados.jpg">
+  </p>
+</div>
+
+<div class="card">
+  <h2>Consecuencias <img src="veteranos.jpg"></h2>
+  <p>
+    El 14 de junio de 1982, terminaria la guerra, con 649 soldados argentinos caidos, se daba por terminada la guerra, pero los veteranos al volver al pais fueron perjudicados por los estigmas sociales, el estres y traumas post-guerra, impidiendoles tener una vida normal y corriente.<br>
+    Debido a eso mas de 800 veteranos se quitaron la vida.<br>
+    Pero no fue hasta el año 1992 que el 2 de Abril se conmemoró sus actos de valentía y patriotismo, siendo ley nacional a partir del 22 de noviembre del 2000, recibiendo el reconocimiento que se merecen y dejando de ser "NN".
+  </p>
+</div>
+
+<div class="card">
+  <h2>Dia Nacional por los Soldados Caidos</h2>
+  <p>
+    Hoy en dia, el 2 de Abril es conmemorado un dia Nacional por los soldados abatidos en la guerra.<br>
+    Este es el himno conmemorativo a las Islas Malvinas.<br>
+  </p>
+
+  <div class="player">
+    <div class="controls">
+      <button id="playBtn">▶</button>
+      <div class="progress" id="progressContainer">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
   </div>
 
+  <audio id="audio" preload="auto">
+    <source src="himno.mp3" type="audio/mpeg">
+  </audio> 
 </div>
+
+</div> 
 
 <footer>
   <p>Las Malvinas son y serán Argentinas</p>
 </footer>
 
+</div>
+
 <script>
 const audio = document.getElementById("audio");
-const progressBar = document.getElementById("progressBar");
 const playBtn = document.getElementById("playBtn");
+const progressBar = document.getElementById("progressBar");
+const progressContainer = document.getElementById("progressContainer");
 
-function toggleAudio() {
+playBtn.addEventListener("click", () => {
   if (audio.paused) {
-    audio.play().then(() => {
-      playBtn.textContent = "II";
-    }).catch(() => {
-      alert("Tocá la pantalla primero para activar el audio 🔊");
-    });
+    audio.play();
+    playBtn.textContent = "II";
   } else {
     audio.pause();
     playBtn.textContent = "▶";
   }
-}
+});
 
 audio.addEventListener("timeupdate", () => {
   const percent = (audio.currentTime / audio.duration) * 100;
   progressBar.style.width = percent + "%";
 });
 
-function setProgress(e) {
-  const width = e.currentTarget.clientWidth;
-  const clickX = e.offsetX;
-  const duration = audio.duration;
-  audio.currentTime = (clickX / width) * duration;
-}
-
-/* 🔥 ACTIVADOR PARA GITHUB */
-document.addEventListener("click", () => {
-  audio.muted = true;
-  audio.play().then(() => {
-    audio.pause();
-    audio.currentTime = 0;
-    audio.muted = false;
-  }).catch(() => {});
-}, { once: true });
+progressContainer.addEventListener("click", (e) => {
+  const width = progressContainer.clientWidth;
+  audio.currentTime = (e.offsetX / width) * audio.duration;
+});
 
 // VIDEO
 const video = document.getElementById("video");
@@ -264,15 +253,12 @@ function toggleVideo() {
 }
 
 video.addEventListener("timeupdate", () => {
-  const percent = (video.currentTime / video.duration) * 100;
-  videoBar.style.width = percent + "%";
+  videoBar.style.width = (video.currentTime / video.duration) * 100 + "%";
 });
 
 function setVideoProgress(e) {
   const width = e.currentTarget.clientWidth;
-  const clickX = e.offsetX;
-  const duration = video.duration;
-  video.currentTime = (clickX / width) * duration;
+  video.currentTime = (e.offsetX / width) * video.duration;
 }
 </script>
 
