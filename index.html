@@ -14,16 +14,21 @@ body {
   color: white; 
 }
 
-/* 🔥 CENTRADO COMO TU EJEMPLO */
+/* 🔥 CONTENEDOR CENTRAL (LA CLAVE) */
+.wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* HEADER ORIGINAL PERO CENTRADO */
 .header { 
   height: 30vh; 
   background: url('isla.jpg') no-repeat center center/cover; 
   display: flex; 
   align-items: center; 
   justify-content: center; 
-  text-align: center; 
-  border-radius: 1500px;
-  margin: 40px;
+  text-align: center;
+  margin: 40px 0;
 }
 
 .header h1 {
@@ -31,25 +36,30 @@ body {
   font-family: 'Lobster', cursive;
 }
 
+/* GRID ORIGINAL */
 .container { 
-  margin: 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  padding: 0 10px;
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+  gap: 20px; 
 }
 
+/* CARTELERAS IGUALES */
 .card { 
-  padding: 25px; 
-  border-radius: 30px;
   background: rgba(255, 255, 255, 0.2); 
   backdrop-filter: blur(8px); 
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  padding: 20px; 
+  border-radius: 15px; 
+  transition: 0.3s;
+}
+
+.card:hover { 
+  transform: translateY(-5px); 
 }
 
 .card h2 { 
   margin-bottom: 10px; 
-  font-family: 'Rubik Dirt', cursive;
-  text-align: center;
+  font-family: 'Rubik Dirt', cursive; 
 }
 
 .card p { 
@@ -58,11 +68,11 @@ body {
   font-family: 'Rubik Dirt', cursive; 
 }
 
+/* IMÁGENES */
 .card img {
   width: 100%;
-  max-width: 500px;
-  display: block;
-  margin: 15px auto;
+  height: auto;
+  margin-top: 10px;
   border-radius: 10px;
 }
 
@@ -111,18 +121,19 @@ video { width: 100%; border-radius: 20px; }
   background: white; 
 }
 
-/* FOOTER */
+/* FOOTER CENTRADO */
 footer {
+  margin: 40px 0;
   text-align: center;
   padding: 20px;
-  background: rgba(0,0,0,0.7);
-  margin: 40px;
-  border-radius: 20px;
+  background: rgba(0,0,0,0.5);
 }
 </style>
 </head>
 
 <body>
+
+<div class="wrapper">
 
 <div class="header">
   <h1>Heroes De Malvinas</h1>
@@ -196,7 +207,10 @@ footer {
   <p>Las Malvinas son y serán Argentinas</p>
 </footer>
 
+</div>
+
 <script>
+// AUDIO
 const audio = document.getElementById("audio");
 const progressBar = document.getElementById("progressBar");
 const playBtn = document.getElementById("playBtn");
@@ -204,7 +218,7 @@ const progressContainer = document.getElementById("progressContainer");
 
 playBtn.addEventListener("click", () => {
   if (audio.paused) {
-    audio.play().catch(e => console.log(e));
+    audio.play();
     playBtn.textContent = "II";
   } else {
     audio.pause();
@@ -225,14 +239,6 @@ progressContainer.addEventListener("click", (e) => {
     audio.currentTime = (clickX / width) * audio.duration;
   }
 });
-
-/* FIX GITHUB MOBILE */
-document.body.addEventListener("click", () => {
-  audio.play().then(() => {
-    audio.pause();
-    audio.currentTime = 0;
-  }).catch(()=>{});
-}, { once: true });
 
 // VIDEO
 const video = document.getElementById("video");
