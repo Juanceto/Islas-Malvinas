@@ -14,13 +14,14 @@ body {
   color: white; 
 }
 
-/* CONTENIDO CENTRADO CON ESPACIOS */
+/* 🔥 CENTRADO REAL DE TODO */
 .wrapper {
   max-width: 900px;
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 20px 15px;
 }
 
+/* HEADER */
 .header { 
   height: 30vh; 
   background: url('isla.jpg') no-repeat center center/cover; 
@@ -29,6 +30,7 @@ body {
   justify-content: center; 
   text-align: center; 
   border-radius: 1500px;
+  margin-bottom: 20px;
 }
 
 .header h1 {
@@ -36,11 +38,10 @@ body {
   font-family: 'Lobster', cursive;
 }
 
+/* CARTELERAS */
 .container { 
-  padding: 40px 0; 
   display: grid; 
-  grid-template-columns: repeat(auto-fit, minmax(250px, 350px)); 
-  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px; 
 }
 
@@ -64,9 +65,10 @@ body {
   font-family: 'Rubik Dirt', cursive; 
 }
 
+/* IMÁGENES */
 .card img {
   width: 90%;
-  max-width: 300px;
+  max-width: 280px;
   margin: 15px auto;
   display: block;
   border-radius: 12px;
@@ -74,11 +76,11 @@ body {
 
 .card h2 img {
   width: 80%;
-  max-width: 220px;
+  max-width: 200px;
 }
 
 /* VIDEO */
-video { width: 100%; border-radius: 25px; }
+video { width: 100%; border-radius: 20px; }
 
 .video-controls { 
   display: flex; 
@@ -122,17 +124,18 @@ video { width: 100%; border-radius: 25px; }
   background: white; 
 }
 
-/* FOOTER CENTRADO */
-.footer-content {
+/* 🔥 FOOTER CENTRADO POSTA */
+footer {
+  margin-top: 20px;
+}
+
+.footer-box {
   max-width: 900px;
-  margin: 20px auto;
+  margin: 0 auto;
   text-align: center;
   background: rgba(0,0,0,0.5);
   padding: 20px;
-}
-
-@media (max-width: 600px) {
-  .container { padding: 20px 0; }
+  border-radius: 15px;
 }
 </style>
 </head>
@@ -202,18 +205,17 @@ video { width: 100%; border-radius: 25px; }
     </div>
   </div>
 
-  <!-- 🔥 AUDIO CON URL -->
   <audio id="audio" preload="auto" crossorigin="anonymous">
-    <source src="https://www.dropbox.com/scl/fi/nxdaze8pn5x0asv28kftj/Marcha-Las-Malvinas-con-letra-MP3_160K.mp3?rlkey=3f3h39be7kyvxdquwybjvagbj&st=4di87kx7&dl=0" type="audio/mp3">
+    <source src="" type="audio/mpeg">
   </audio> 
 </div>
 
-</div> 
+</div>
 
 </div>
 
 <footer>
-  <div class="footer-content">
+  <div class="footer-box">
     <p>Las Malvinas son y serán Argentinas</p>
   </div>
 </footer>
@@ -224,6 +226,7 @@ const playBtn = document.getElementById("playBtn");
 const progressBar = document.getElementById("progressBar");
 const progressContainer = document.getElementById("progressContainer");
 
+/* 🔥 CLICK REAL (FUNCIONA EN GITHUB) */
 playBtn.addEventListener("click", () => {
   if (audio.paused) {
     audio.play();
@@ -235,25 +238,25 @@ playBtn.addEventListener("click", () => {
 });
 
 audio.addEventListener("timeupdate", () => {
-  const percent = (audio.currentTime / audio.duration) * 100;
-  progressBar.style.width = percent + "%";
+  progressBar.style.width = (audio.currentTime / audio.duration) * 100 + "%";
 });
 
 progressContainer.addEventListener("click", (e) => {
   const width = progressContainer.clientWidth;
-  const clickX = e.offsetX;
-  audio.currentTime = (clickX / width) * audio.duration;
+  audio.currentTime = (e.offsetX / width) * audio.duration;
 });
 
-/* FIX AUTOPLAY GITHUB */
-document.addEventListener("click", () => {
+/* 🔥 DESBLOQUEO REAL AUDIO */
+document.body.addEventListener("click", () => {
+  audio.muted = true;
   audio.play().then(() => {
     audio.pause();
     audio.currentTime = 0;
+    audio.muted = false;
   }).catch(()=>{});
 }, { once: true });
 
-// VIDEO
+/* VIDEO */
 const video = document.getElementById("video");
 const videoBar = document.getElementById("videoBar");
 const videoBtn = document.getElementById("videoBtn");
@@ -269,9 +272,7 @@ video.addEventListener("timeupdate", () => {
 
 function setVideoProgress(e) {
   const width = e.currentTarget.clientWidth;
-  const clickX = e.offsetX;
-  const duration = video.duration;
-  video.currentTime = (clickX / width) * duration;
+  video.currentTime = (e.offsetX / width) * video.duration;
 }
 </script>
 
