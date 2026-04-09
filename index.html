@@ -30,10 +30,12 @@ body {
   font-family: 'Lobster', cursive;
 }
 
+/* 🔥 CENTRADO REAL */
 .container { 
   padding: 40px; 
   display: grid; 
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+  grid-template-columns: repeat(auto-fit, minmax(250px, 350px)); 
+  justify-content: center;
   gap: 20px; 
   max-width: 1000px;
   margin: 0 auto;
@@ -59,44 +61,68 @@ body {
   font-family: 'Rubik Dirt', cursive; 
 }
 
-/* 🔥 IMÁGENES MEJORADAS */
+/* 🔥 IMÁGENES BIEN */
 .card img {
-  width: 90%;              /* deja margen a los lados */
-  max-width: 300px;       /* tamaño prolijo */
+  width: 90%;
+  max-width: 300px;
   height: auto;
   display: block;
-  margin: 15px auto;      /* centra + espacio arriba/abajo */
+  margin: 15px auto;
   border-radius: 12px;
 }
 
-/* imagen dentro del h2 */
 .card h2 img {
   width: 80%;
   max-width: 220px;
   margin: 10px auto 0;
 }
 
-/* Video */
-video { width: 100%; border-radius: 20px; }
+/* VIDEO */
+.video-wrapper { margin-top: 10px; }
+video { width: 100%; border-radius: 25px; }
 
-.video-controls {
-  display: flex;
-  gap: 10px;
-  margin-top: 5px;
-  background: rgba(0,0,0,0.4);
-  padding: 8px;
-  border-radius: 300px;
+.video-controls { 
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
+  margin-top: 5px; 
+  background: rgba(0,0,0,0.4); 
+  padding: 8px; 
+  border-radius: 300px; 
 }
 
-/* 🔥 AUDIO COMPATIBLE GITHUB */
-.player {
-  margin-top: 10px;
-  text-align: center;
+/* AUDIO */
+.player { 
+  margin-top: 10px; 
+  background: rgba(255,255,255,0.3); 
+  backdrop-filter: blur(10px); 
+  padding: 10px; 
+  border-radius: 30px; 
 }
 
-.player audio {
-  width: 100%;
-  margin-top: 10px;
+.controls { display: flex; align-items: center; gap: 10px; }
+
+.controls button { 
+  background: transparent; 
+  border: 1px solid white; 
+  color:white; 
+  padding: 6px 12px; 
+  border-radius: 8px; 
+  cursor: pointer; 
+}
+
+.progress { 
+  flex: 1; 
+  height: 5px; 
+  background: rgba(255,255,255,0.3); 
+  border-radius: 5px; 
+  cursor: pointer; 
+}
+
+.progress-bar { 
+  height: 100%; 
+  width: 0%; 
+  background: white; 
 }
 
 footer {
@@ -125,11 +151,19 @@ footer {
     <p>
       El 2 de Abril de 1982 en Plaza de Mayo, el presidente de facto de ese entonces, <strong>Leopoldo Fortunato Galtieri</strong>, daba una cadena nacional en el balcon de la casa rosada, declarandole la guerra a Reino Unido, para recuperar las islas.<br>
       La plaza se ensordeció al grito de <strong>"Si quieren venir que vengan, y les presentaremos batalla..."</strong><br>
-    </p>
 
-    <video controls>
-      <source src="galtieri.mp4" type="video/mp4">
-    </video>
+      <div class="video-wrapper">
+        <video id="video">
+          <source src="galtieri.mp4" type="video/mp4">
+        </video>
+        <div class="video-controls">
+          <button id="videoBtn" onclick="toggleVideo()">▶</button>
+          <div class="progress" onclick="setVideoProgress(event)">
+            <div class="progress-bar" id="videoBar"></div>
+          </div>
+        </div>
+      </div>
+    </p>
   </div>
 
   <div class="card">
@@ -155,16 +189,22 @@ footer {
     <h2>Dia Nacional por los Soldados Caidos</h2>
     <p>
       Hoy en dia, el 2 de Abril es conmemorado un dia Nacional por los soldados abatidos en la guerra.<br>
-      Este es el himno conmemorativo a las Islas Malvinas.
+      Este es el himno conmemorativo a las Islas Malvinas.<br>
     </p>
 
-    <!-- 🔥 AUDIO NATIVO (FUNCIONA EN GITHUB) -->
     <div class="player">
-      <audio controls>
-        <source src="himno.mp3" type="audio/mpeg">
-      </audio>
+      <div class="controls">
+        <button id="playBtn" onclick="toggleAudio()">▶</button>
+        <div class="progress" onclick="setProgress(event)">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+      </div>
     </div>
 
+    <!-- 🔥 AUDIO FIX GITHUB -->
+    <audio id="audio" preload="auto">
+      <source src="himno.mp3" type="audio/mpeg">
+    </audio> 
   </div>
 
 </div>
@@ -172,6 +212,69 @@ footer {
 <footer>
   <p>Las Malvinas son y serán Argentinas</p>
 </footer>
+
+<script>
+const audio = document.getElementById("audio");
+const progressBar = document.getElementById("progressBar");
+const playBtn = document.getElementById("playBtn");
+
+function toggleAudio() {
+  if (audio.paused) {
+    audio.play().then(() => {
+      playBtn.textContent = "II";
+    }).catch(() => {
+      alert("Tocá la pantalla primero para activar el audio 🔊");
+    });
+  } else {
+    audio.pause();
+    playBtn.textContent = "▶";
+  }
+}
+
+audio.addEventListener("timeupdate", () => {
+  const percent = (audio.currentTime / audio.duration) * 100;
+  progressBar.style.width = percent + "%";
+});
+
+function setProgress(e) {
+  const width = e.currentTarget.clientWidth;
+  const clickX = e.offsetX;
+  const duration = audio.duration;
+  audio.currentTime = (clickX / width) * duration;
+}
+
+/* 🔥 ACTIVADOR PARA GITHUB */
+document.addEventListener("click", () => {
+  audio.muted = true;
+  audio.play().then(() => {
+    audio.pause();
+    audio.currentTime = 0;
+    audio.muted = false;
+  }).catch(() => {});
+}, { once: true });
+
+// VIDEO
+const video = document.getElementById("video");
+const videoBar = document.getElementById("videoBar");
+const videoBtn = document.getElementById("videoBtn");
+
+function toggleVideo() {
+  if (video.paused) { video.play(); videoBtn.textContent = "II"; }
+  else { video.pause(); videoBtn.textContent = "▶"; }
+}
+
+video.addEventListener("timeupdate", () => {
+  const percent = (video.currentTime / video.duration) * 100;
+  videoBar.style.width = percent + "%";
+});
+
+function setVideoProgress(e) {
+  const width = e.currentTarget.clientWidth;
+  const clickX = e.offsetX;
+  const duration = video.duration;
+  video.currentTime = (clickX / width) * duration;
+}
+</script>
 
 </body>
 </html>
