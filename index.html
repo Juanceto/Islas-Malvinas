@@ -14,14 +14,7 @@ body {
   color: white; 
 }
 
-/* 🔥 CENTRADO REAL DE TODO */
-.wrapper {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 20px 15px;
-}
-
-/* HEADER */
+/* 🔥 CENTRADO COMO TU EJEMPLO */
 .header { 
   height: 30vh; 
   background: url('isla.jpg') no-repeat center center/cover; 
@@ -30,7 +23,7 @@ body {
   justify-content: center; 
   text-align: center; 
   border-radius: 1500px;
-  margin-bottom: 20px;
+  margin: 40px;
 }
 
 .header h1 {
@@ -38,25 +31,25 @@ body {
   font-family: 'Lobster', cursive;
 }
 
-/* CARTELERAS */
 .container { 
-  display: grid; 
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px; 
+  margin: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .card { 
+  padding: 25px; 
+  border-radius: 30px;
   background: rgba(255, 255, 255, 0.2); 
   backdrop-filter: blur(8px); 
-  padding: 20px; 
-  border-radius: 15px; 
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
 .card h2 { 
   margin-bottom: 10px; 
   font-family: 'Rubik Dirt', cursive;
-  display: flex;
-  flex-direction: column;
+  text-align: center;
 }
 
 .card p { 
@@ -65,18 +58,12 @@ body {
   font-family: 'Rubik Dirt', cursive; 
 }
 
-/* IMÁGENES */
 .card img {
-  width: 90%;
-  max-width: 280px;
-  margin: 15px auto;
+  width: 100%;
+  max-width: 500px;
   display: block;
-  border-radius: 12px;
-}
-
-.card h2 img {
-  width: 80%;
-  max-width: 200px;
+  margin: 15px auto;
+  border-radius: 10px;
 }
 
 /* VIDEO */
@@ -124,25 +111,18 @@ video { width: 100%; border-radius: 20px; }
   background: white; 
 }
 
-
+/* FOOTER */
 footer {
-  margin-top: 20px;
-}
-
-.footer-box {
-  max-width: 900px;
-  margin: 0 auto;
   text-align: center;
-  background: rgba(0,0,0,0.5);
   padding: 20px;
-  border-radius: 0px;
+  background: rgba(0,0,0,0.7);
+  margin: 40px;
+  border-radius: 20px;
 }
 </style>
 </head>
 
 <body>
-
-<div class="wrapper">
 
 <div class="header">
   <h1>Heroes De Malvinas</h1>
@@ -206,30 +186,25 @@ footer {
   </div>
 
   <audio id="audio">
-    <source src="marcha.mp3" type="audio/mp3">
+    <source src="./marcha.mp3" type="audio/mpeg">
   </audio> 
 </div>
 
-</div>
-
-</div>
+</div> 
 
 <footer>
-  <div class="footer-box">
-    <p>Las Malvinas son y serán Argentinas</p>
-  </div>
+  <p>Las Malvinas son y serán Argentinas</p>
 </footer>
 
 <script>
 const audio = document.getElementById("audio");
-const playBtn = document.getElementById("playBtn");
 const progressBar = document.getElementById("progressBar");
+const playBtn = document.getElementById("playBtn");
 const progressContainer = document.getElementById("progressContainer");
 
-/* 🔥 CLICK REAL (FUNCIONA EN GITHUB) */
 playBtn.addEventListener("click", () => {
   if (audio.paused) {
-    audio.play();
+    audio.play().catch(e => console.log(e));
     playBtn.textContent = "II";
   } else {
     audio.pause();
@@ -238,25 +213,28 @@ playBtn.addEventListener("click", () => {
 });
 
 audio.addEventListener("timeupdate", () => {
-  progressBar.style.width = (audio.currentTime / audio.duration) * 100 + "%";
+  if (audio.duration) {
+    progressBar.style.width = (audio.currentTime / audio.duration) * 100 + "%";
+  }
 });
 
 progressContainer.addEventListener("click", (e) => {
   const width = progressContainer.clientWidth;
-  audio.currentTime = (e.offsetX / width) * audio.duration;
+  const clickX = e.offsetX;
+  if (audio.duration) {
+    audio.currentTime = (clickX / width) * audio.duration;
+  }
 });
 
-/* 🔥 DESBLOQUEO REAL AUDIO */
+/* FIX GITHUB MOBILE */
 document.body.addEventListener("click", () => {
-  audio.muted = true;
   audio.play().then(() => {
     audio.pause();
     audio.currentTime = 0;
-    audio.muted = false;
   }).catch(()=>{});
 }, { once: true });
 
-/* VIDEO */
+// VIDEO
 const video = document.getElementById("video");
 const videoBar = document.getElementById("videoBar");
 const videoBtn = document.getElementById("videoBtn");
@@ -267,12 +245,15 @@ function toggleVideo() {
 }
 
 video.addEventListener("timeupdate", () => {
-  videoBar.style.width = (video.currentTime / video.duration) * 100 + "%";
+  const percent = (video.currentTime / video.duration) * 100;
+  videoBar.style.width = percent + "%";
 });
 
 function setVideoProgress(e) {
   const width = e.currentTarget.clientWidth;
-  video.currentTime = (e.offsetX / width) * video.duration;
+  const clickX = e.offsetX;
+  const duration = video.duration;
+  video.currentTime = (clickX / width) * duration;
 }
 </script>
 
