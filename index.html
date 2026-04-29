@@ -9,22 +9,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Rubik+Dirt&display=swap" rel="stylesheet">
 
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body { 
   background: url('malvinas.jpg') no-repeat center center fixed; 
   background-size: cover; 
   color: white; 
+  overflow-x: hidden; 
 }
 
-/* CENTRADO */
+
 .wrapper {
   max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 10px;
+  margin: auto;
+  padding: 10px;
 }
 
-/* HEADER */
 .header { 
   height: 30vh; 
   background: url('isla.jpg') no-repeat center center/cover; 
@@ -32,8 +32,8 @@ body {
   align-items: center; 
   justify-content: center; 
   text-align: center;
-  margin: 40px 0;
-  border-radius: 1500px
+  margin: 30px 0;
+  border-radius: 1000px;
 }
 
 .header h1 {
@@ -41,61 +41,63 @@ body {
   font-family: 'Lobster', cursive;
 }
 
-/* GRID FIX */
-.container { 
-  display: grid; 
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-  gap: 20px; 
-  align-items: start; /* 🔥 clave */
+.container {
+  column-count: 2;
+  column-gap: 20px;
 }
 
-/* CARDS */
-.card { 
-  background: rgba(255, 255, 255, 0.2); 
-  backdrop-filter: blur(8px); 
-  padding: 20px; 
-  border-radius: 15px; 
-  transition: 0.3s;
+@media (max-width: 700px) {
+  .container {
+    column-count: 1;
+  }
 }
 
-.card h2 { 
-  margin-bottom: 10px; 
-  font-family: 'Rubik Dirt', cursive; 
+.card {
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(8px);
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  break-inside: avoid;
+  display: inline-block;
+  width: 100%;
 }
 
-.card p { 
-  font-size: 0.95rem; 
-  line-height: 1.5; 
-  font-family: 'Rubik Dirt', cursive; 
+.card h2 {
+  margin-bottom: 10px;
+  font-family: 'Rubik Dirt', cursive;
 }
 
-/* IMÁGENES */
+.card p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  font-family: 'Rubik Dirt', cursive;
+}
+
+
 .card img {
   width: 100%;
-  height: auto;
   margin-top: 10px;
   border-radius: 10px;
 }
 
-/* VIDEO */
 video { width: 100%; border-radius: 20px; }
 
 .video-controls { 
   display: flex; 
-  align-items: center;
   justify-content: center;
   gap: 10px; 
   margin-top: 5px; 
   background: rgba(0,0,0,0.4); 
   padding: 8px; 
-  border-radius: 300px; 
+  border-radius: 50px; 
 }
 
 .video-controls .progress {
   width: 70%;
 }
 
-/* AUDIO */
+
 .player { 
   margin-top: 10px; 
   background: rgba(255,255,255,0.3); 
@@ -105,7 +107,6 @@ video { width: 100%; border-radius: 20px; }
 
 .controls { 
   display: flex; 
-  align-items: center;
   justify-content: center; 
   gap: 10px; 
 }
@@ -136,13 +137,12 @@ video { width: 100%; border-radius: 20px; }
   background: white; 
 }
 
-/* FOOTER FIX */
 footer {
   width: 100%;
   text-align: center;
   padding: 20px;
   background: rgba(0,0,0,0.7);
-  margin-top: 40px;
+  margin-top: 20px;
 }
 </style>
 </head>
@@ -157,44 +157,39 @@ footer {
 
 <div class="container">
 
+
 <div class="card">
   <h2>2 de Abril 1982</h2>
-
   <p>
     El 2 de Abril de 1982 en Plaza de Mayo, el presidente de facto de ese entonces, <strong>Leopoldo Fortunato Galtieri</strong>, daba una cadena nacional en el balcon de la casa rosada, declarandole la guerra a Reino Unido, para recuperar las islas.<br>
     La plaza se ensordeció al grito de <strong>"Si quieren venir que vengan, y les presentaremos batalla..."</strong>
   </p>
 
-  <div class="video-wrapper">
-    <video id="video">
-      <source src="galtieri.mp4" type="video/mp4">
-    </video>
-    <div class="video-controls">
-      <button id="videoBtn" onclick="toggleVideo()">▶</button>
-      <div class="progress" onclick="setVideoProgress(event)">
-        <div class="progress-bar" id="videoBar"></div>
-      </div>
+  <video id="video">
+    <source src="galtieri.mp4" type="video/mp4">
+  </video>
+
+  <div class="video-controls">
+    <button id="videoBtn" onclick="toggleVideo()">▶</button>
+    <div class="progress" onclick="setVideoProgress(event)">
+      <div class="progress-bar" id="videoBar"></div>
     </div>
   </div>
 </div>
 
 <div class="card">
   <h2>Causas</h2>
-
   <p>
     La Guerra de Malvinas empezó en 1982, principalmente porque la dictadura argentina estaba en crisis, había problemas económicos y mucha gente en contra, así que quisieron tapar lo que ocurria en el pais provocando una guerra.
     Un hecho importante fue lo del chatarrero Constantino Davidoff, que fue a Georgias del Sur a desarmar instalaciones y puso la bandera argentina, lo que generó tensión con los británicos al creer que era una forma de <strong>"soberania"</strong>.
     Esa situación provocó el inicio de la guerra y un ambiente tenso entre Argentina y Reino Unido
   </p>
-
   <img src="soldados.jpg">
 </div>
 
 <div class="card">
   <h2>Consecuencias</h2>
-
   <img src="veteranos.jpg">
-
   <p>
     El 14 de junio de 1982, terminaria la guerra, con 649 soldados argentinos caidos, se daba por terminada la guerra, pero los veteranos al volver al pais fueron perjudicados por los estigmas sociales, el estres y traumas post-guerra, impidiendoles tener una vida normal y corriente.<br>
     Debido a eso mas de 800 veteranos se quitaron la vida.<br>
@@ -204,7 +199,6 @@ footer {
 
 <div class="card">
   <h2>Dia Nacional por los Soldados Caidos</h2>
-
   <p>
     Hoy en dia, el 2 de Abril es conmemorado un dia Nacional por los soldados abatidos en la guerra.<br>
     Este es el himno conmemorativo a las Islas Malvinas.
@@ -233,7 +227,7 @@ footer {
 </footer>
 
 <script>
-// AUDIO
+
 const audio = document.getElementById("audio");
 const progressBar = document.getElementById("progressBar");
 const playBtn = document.getElementById("playBtn");
@@ -263,7 +257,6 @@ progressContainer.addEventListener("click", (e) => {
   }
 });
 
-// VIDEO
 const video = document.getElementById("video");
 const videoBar = document.getElementById("videoBar");
 const videoBtn = document.getElementById("videoBtn");
