@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
+<!DOCTYPE html><html lang="es"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Malvinas</title>
@@ -9,20 +7,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Rubik+Dirt&display=swap" rel="stylesheet">
 
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
 
 body { 
   background: url('malvinas.jpg') no-repeat center center fixed; 
   background-size: cover; 
   color: white; 
-  overflow-x: hidden; 
+  overflow-x: hidden;
 }
-
 
 .wrapper {
   max-width: 1100px;
-  margin: auto;
-  padding: 10px;
+  margin: 0 auto;
+  padding: 0 10px;
 }
 
 .header { 
@@ -32,8 +29,8 @@ body {
   align-items: center; 
   justify-content: center; 
   text-align: center;
-  margin: 30px 0;
-  border-radius: 1000px;
+  margin: 40px 0;
+  border-radius: 1500px
 }
 
 .header h1 {
@@ -41,6 +38,7 @@ body {
   font-family: 'Lobster', cursive;
 }
 
+/* Pinterest */
 .container {
   column-count: 2;
   column-gap: 20px;
@@ -52,79 +50,47 @@ body {
   }
 }
 
-.card {
-  background: rgba(255,255,255,0.2);
-  backdrop-filter: blur(8px);
-  padding: 20px;
-  border-radius: 15px;
+.card { 
+  background: rgba(255, 255, 255, 0.2); 
+  backdrop-filter: blur(8px); 
+  padding: 20px; 
+  border-radius: 15px; 
   margin-bottom: 20px;
   break-inside: avoid;
   display: inline-block;
   width: 100%;
 }
 
-.card h2 {
-  margin-bottom: 10px;
-  font-family: 'Rubik Dirt', cursive;
+.card h2 { 
+  margin-bottom: 10px; 
+  font-family: 'Rubik Dirt', cursive; 
 }
 
-.card p {
-  font-size: 0.95rem;
-  line-height: 1.5;
-  font-family: 'Rubik Dirt', cursive;
+.card p { 
+  font-size: 0.95rem; 
+  line-height: 1.5; 
+  font-family: 'Rubik Dirt', cursive; 
 }
-
 
 .card img {
   width: 100%;
+  height: auto;
   margin-top: 10px;
   border-radius: 10px;
 }
 
-video { width: 100%; border-radius: 20px; }
-
-.video-controls { 
+/* CONTROLES CENTRADOS */
+.video-controls, .controls { 
   display: flex; 
+  align-items: center;
   justify-content: center;
   gap: 10px; 
-  margin-top: 5px; 
-  background: rgba(0,0,0,0.4); 
-  padding: 8px; 
-  border-radius: 50px; 
-}
-
-.video-controls .progress {
-  width: 70%;
-}
-
-
-.player { 
-  margin-top: 10px; 
-  background: rgba(255,255,255,0.3); 
-  padding: 10px; 
-  border-radius: 30px; 
-}
-
-.controls { 
-  display: flex; 
-  justify-content: center; 
-  gap: 10px; 
-}
-
-.controls .progress {
-  width: 70%;
-}
-
-.controls button { 
-  background: transparent; 
-  border: 1px solid white; 
-  color:white; 
-  padding: 6px 12px; 
-  border-radius: 8px; 
-  cursor: pointer;
+  margin-top: 5px;
 }
 
 .progress { 
+  flex: 1;
+  max-width: 300px;
   height: 5px; 
   background: rgba(255,255,255,0.3); 
   border-radius: 5px;
@@ -137,12 +103,30 @@ video { width: 100%; border-radius: 20px; }
   background: white; 
 }
 
+video { width: 100%; border-radius: 20px; }
+
+.player { 
+  margin-top: 10px; 
+  background: rgba(255,255,255,0.3); 
+  padding: 10px; 
+  border-radius: 30px; 
+}
+
+.controls button, .video-controls button { 
+  background: transparent; 
+  border: 1px solid white; 
+  color:white; 
+  padding: 6px 12px; 
+  border-radius: 8px; 
+  cursor: pointer;
+}
+
 footer {
   width: 100%;
   text-align: center;
   padding: 20px;
   background: rgba(0,0,0,0.7);
-  margin-top: 20px;
+  margin-top: 40px;
 }
 </style>
 </head>
@@ -157,7 +141,6 @@ footer {
 
 <div class="container">
 
-
 <div class="card">
   <h2>2 de Abril 1982</h2>
   <p>
@@ -170,6 +153,7 @@ footer {
   </video>
 
   <div class="video-controls">
+    <span id="videoTime">0:00 / 0:00</span>
     <button id="videoBtn" onclick="toggleVideo()">▶</button>
     <div class="progress" onclick="setVideoProgress(event)">
       <div class="progress-bar" id="videoBar"></div>
@@ -206,6 +190,7 @@ footer {
 
   <div class="player">
     <div class="controls">
+      <span id="audioTime">0:00 / 0:00</span>
       <button id="playBtn">▶</button>
       <div class="progress" id="progressContainer">
         <div class="progress-bar" id="progressBar"></div>
@@ -227,11 +212,19 @@ footer {
 </footer>
 
 <script>
+// FORMATO TIEMPO
+function formatTime(time) {
+  const minutes = Math.floor(time / 60);
+  const seconds = Math.floor(time % 60).toString().padStart(2, '0');
+  return `${minutes}:${seconds}`;
+}
 
+// AUDIO
 const audio = document.getElementById("audio");
 const progressBar = document.getElementById("progressBar");
 const playBtn = document.getElementById("playBtn");
 const progressContainer = document.getElementById("progressContainer");
+const audioTime = document.getElementById("audioTime");
 
 playBtn.addEventListener("click", () => {
   if (audio.paused) {
@@ -246,6 +239,7 @@ playBtn.addEventListener("click", () => {
 audio.addEventListener("timeupdate", () => {
   if (audio.duration) {
     progressBar.style.width = (audio.currentTime / audio.duration) * 100 + "%";
+    audioTime.textContent = formatTime(audio.currentTime) + " / " + formatTime(audio.duration);
   }
 });
 
@@ -257,9 +251,11 @@ progressContainer.addEventListener("click", (e) => {
   }
 });
 
+// VIDEO
 const video = document.getElementById("video");
 const videoBar = document.getElementById("videoBar");
 const videoBtn = document.getElementById("videoBtn");
+const videoTime = document.getElementById("videoTime");
 
 function toggleVideo() {
   if (video.paused) { video.play(); videoBtn.textContent = "II"; }
@@ -269,6 +265,10 @@ function toggleVideo() {
 video.addEventListener("timeupdate", () => {
   const percent = (video.currentTime / video.duration) * 100;
   videoBar.style.width = percent + "%";
+
+  if (video.duration) {
+    videoTime.textContent = formatTime(video.currentTime) + " / " + formatTime(video.duration);
+  }
 });
 
 function setVideoProgress(e) {
