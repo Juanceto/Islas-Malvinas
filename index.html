@@ -121,6 +121,22 @@ video { width: 100%; border-radius: 20px; }
   cursor: pointer;
 }
 
+/* 🔥 TIEMPO MÁS CHICO */
+.video-controls span,
+.controls span {
+  font-size: 0.7rem;
+  min-width: 55px;
+  text-align: center;
+}
+
+@media (max-width: 500px) {
+  .video-controls span,
+  .controls span {
+    font-size: 0.6rem;
+    min-width: 45px;
+  }
+}
+
 footer {
   width: 100%;
   text-align: center;
@@ -212,14 +228,12 @@ footer {
 </footer>
 
 <script>
-// FORMATO TIEMPO
 function formatTime(time) {
   const minutes = Math.floor(time / 60);
   const seconds = Math.floor(time % 60).toString().padStart(2, '0');
   return `${minutes}:${seconds}`;
 }
 
-// AUDIO
 const audio = document.getElementById("audio");
 const progressBar = document.getElementById("progressBar");
 const playBtn = document.getElementById("playBtn");
@@ -251,7 +265,6 @@ progressContainer.addEventListener("click", (e) => {
   }
 });
 
-// VIDEO
 const video = document.getElementById("video");
 const videoBar = document.getElementById("videoBar");
 const videoBtn = document.getElementById("videoBtn");
