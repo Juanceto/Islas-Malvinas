@@ -1,7 +1,10 @@
-<!DOCTYPE html><html lang="es"><head>
+<!DOCTYPE html>
+<html lang="es">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Malvinas</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Rubik+Dirt&display=swap" rel="stylesheet">
 
@@ -14,10 +17,11 @@ body {
   color: white; 
 }
 
-/* 🔥 CENTRADO REAL */
+/* CENTRADO */
 .wrapper {
   max-width: 1100px;
   margin: 0 auto;
+  padding: 0 10px;
 }
 
 /* HEADER */
@@ -37,21 +41,21 @@ body {
   font-family: 'Lobster', cursive;
 }
 
-/* GRID ORIGINAL */
+/* GRID FIX */
 .container { 
   display: grid; 
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
   gap: 20px; 
+  align-items: start; /* 🔥 clave */
 }
 
-/* CARTELERAS */
+/* CARDS */
 .card { 
   background: rgba(255, 255, 255, 0.2); 
   backdrop-filter: blur(8px); 
   padding: 20px; 
   border-radius: 15px; 
   transition: 0.3s;
-  height: auto;
 }
 
 .card h2 { 
@@ -79,7 +83,7 @@ video { width: 100%; border-radius: 20px; }
 .video-controls { 
   display: flex; 
   align-items: center;
-  justify-content: center; /* 🔥 CENTRADO */
+  justify-content: center;
   gap: 10px; 
   margin-top: 5px; 
   background: rgba(0,0,0,0.4); 
@@ -132,8 +136,9 @@ video { width: 100%; border-radius: 20px; }
   background: white; 
 }
 
+/* FOOTER FIX */
 footer {
-  width: 101%;
+  width: 100%;
   text-align: center;
   padding: 20px;
   background: rgba(0,0,0,0.7);
@@ -154,36 +159,42 @@ footer {
 
 <div class="card">
   <h2>2 de Abril 1982</h2>
+
   <p>
     El 2 de Abril de 1982 en Plaza de Mayo, el presidente de facto de ese entonces, <strong>Leopoldo Fortunato Galtieri</strong>, daba una cadena nacional en el balcon de la casa rosada, declarandole la guerra a Reino Unido, para recuperar las islas.<br>
-    La plaza se ensordeció al grito de <strong>"Si quieren venir que vengan, y les presentaremos batalla..."</strong><br>
+    La plaza se ensordeció al grito de <strong>"Si quieren venir que vengan, y les presentaremos batalla..."</strong>
+  </p>
 
-    <div class="video-wrapper">
-      <video id="video">
-        <source src="galtieri.mp4" type="video/mp4">
-      </video>
-      <div class="video-controls">
-        <button id="videoBtn" onclick="toggleVideo()">▶</button>
-        <div class="progress" onclick="setVideoProgress(event)">
-          <div class="progress-bar" id="videoBar"></div>
-        </div>
+  <div class="video-wrapper">
+    <video id="video">
+      <source src="galtieri.mp4" type="video/mp4">
+    </video>
+    <div class="video-controls">
+      <button id="videoBtn" onclick="toggleVideo()">▶</button>
+      <div class="progress" onclick="setVideoProgress(event)">
+        <div class="progress-bar" id="videoBar"></div>
       </div>
     </div>
-  </p>
+  </div>
 </div>
 
 <div class="card">
   <h2>Causas</h2>
+
   <p>
     La Guerra de Malvinas empezó en 1982, principalmente porque la dictadura argentina estaba en crisis, había problemas económicos y mucha gente en contra, así que quisieron tapar lo que ocurria en el pais provocando una guerra.
     Un hecho importante fue lo del chatarrero Constantino Davidoff, que fue a Georgias del Sur a desarmar instalaciones y puso la bandera argentina, lo que generó tensión con los británicos al creer que era una forma de <strong>"soberania"</strong>.
-    Esa situación provocó el inicio de la guerra y un ambiente tenso entre Argentina y Reino Unido<br>
-    <img src="soldados.jpg">
+    Esa situación provocó el inicio de la guerra y un ambiente tenso entre Argentina y Reino Unido
   </p>
+
+  <img src="soldados.jpg">
 </div>
 
 <div class="card">
-  <h2>Consecuencias <img src="veteranos.jpg"></h2>
+  <h2>Consecuencias</h2>
+
+  <img src="veteranos.jpg">
+
   <p>
     El 14 de junio de 1982, terminaria la guerra, con 649 soldados argentinos caidos, se daba por terminada la guerra, pero los veteranos al volver al pais fueron perjudicados por los estigmas sociales, el estres y traumas post-guerra, impidiendoles tener una vida normal y corriente.<br>
     Debido a eso mas de 800 veteranos se quitaron la vida.<br>
@@ -193,9 +204,10 @@ footer {
 
 <div class="card">
   <h2>Dia Nacional por los Soldados Caidos</h2>
+
   <p>
     Hoy en dia, el 2 de Abril es conmemorado un dia Nacional por los soldados abatidos en la guerra.<br>
-    Este es el himno conmemorativo a las Islas Malvinas.<br>
+    Este es el himno conmemorativo a las Islas Malvinas.
   </p>
 
   <div class="player">
@@ -207,7 +219,7 @@ footer {
     </div>
   </div>
 
-  <audio id=audio>
+  <audio id="audio">
     <source src="Marcha a las Malvinas(MP3_160K).mp3" type="audio/mpeg">
     <source src="Marcha a las Malvinas(MP3_160K).mp3" type="audio/mpeg">
   </audio> 
@@ -217,7 +229,7 @@ footer {
 </div>
 
 <footer>
-  <p>Las Malvinas son y serán Argentinas<br>E.E.S.T N°3 Islas Malvinas Lanús</br></p>
+  <p>Las Malvinas son y serán Argentinas<br>E.E.S.T N°3 Islas Malvinas Lanús</p>
 </footer>
 
 <script>
